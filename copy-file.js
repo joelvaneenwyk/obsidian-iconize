@@ -9,6 +9,9 @@ const copyFile = (options = {}) => {
         try {
           console.log(`copying ${target.src}...`);
           const destPath = target.dest + target.src.split('/').pop();
+          await fs.mkdir(target.dest, {
+            recursive: true,
+          });
           await fs.copyFile(target.src, destPath);
         } catch (error) {
           console.log(error);
