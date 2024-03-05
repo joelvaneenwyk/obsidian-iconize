@@ -4,7 +4,7 @@
 
 ## What is it?
 
-This obsidian plugin allows you to add **any** custom icon (of type `.svg`) or from an icon pack to anything you want.
+This Obsidian plugin allows you to add **any** custom icon (of type `.svg`) or from an icon pack to anything you want.
 
 Refer to the official documentation for more information:
 [https://florianwoelki.github.io/obsidian-iconize/](https://florianwoelki.github.io/obsidian-iconize/) about the plugin and its functionalities.
@@ -28,10 +28,11 @@ If you like this plugin, feel free to support the development by buying a coffee
 ## Development
 
 To customize this project for your needs, you can clone it and then install all dependencies:
+
 ```sh
-$ git clone https://github.com/FlorianWoelki/obsidian-iconize
-$ cd obsidian-iconize
-$ pnpm i
+git clone https://github.com/FlorianWoelki/obsidian-iconize
+cd obsidian-iconize
+pnpm i
 ```
 
 After the installation, you need to create a `env.js` file in the root directory. Fill the file with the following content:
@@ -46,9 +47,9 @@ Make sure you create the directory specified in that variable if it does not exi
 Afterwards, you can start the rollup dev server by using:
 
 ```sh
-$ pnpm dev
+pnpm dev
 ```
 
-This command will automatically build the neccesary files for testing and developing on every change. Furthermore, it does copy all the necessary files to the plugin directory you specified.
+This command will automatically build the necessary files for testing and developing on every change. Furthermore, it does copy all the necessary files to the plugin directory you specified.
 
 Finally, you can customize the plugin and add it to your plugins.
