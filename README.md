@@ -4,6 +4,8 @@
 
 ## What is it?
 
+<!-- markdownlint-disable MD033 -->
+
 This Obsidian plugin allows you to add **any** custom icon (of type `.svg`) or from an icon pack to anything you want.
 
 Refer to the official documentation for more information:
