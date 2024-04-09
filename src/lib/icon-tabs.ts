@@ -1,5 +1,5 @@
 import { TFile } from 'obsidian';
-import IconFolderPlugin from '@app/main';
+import IconFolderPlugin, { FolderIconObject } from '@app/main';
 import { DEFAULT_FILE_ICON, getAllOpenedFiles } from '@app/util';
 import { TabHeaderLeaf } from '@app/@types/obsidian';
 import customRule from './custom-rule';
@@ -78,12 +78,27 @@ const add = async (
 
   // Add icons to tabs if there is an icon set.
   const iconData = data.find(([dataPath]) => dataPath === file.path);
-  // Check if data was not found or name of icon is not a string.
-  if (!iconData || typeof iconData[1] !== 'string') {
+  if (!iconData) {
     return;
   }
 
-  dom.setIconForNode(plugin, iconData[1], iconContainer, iconColor);
+  const value = iconData[1];
+  if (typeof value !== 'string' && typeof value !== 'object') {
+    return;
+  }
+
+  let iconName;
+  if (typeof value === 'object') {
+    const v = value as FolderIconObject;
+    if (v.iconName === null) {
+      return;
+    }
+    iconName = v.iconName;
+  } else {
+    iconName = value;
+  }
+
+  dom.setIconForNode(plugin, iconName, iconContainer, iconColor);
   // TODO: Refactor to include option to `insertIconToNode` function.
   iconContainer.style.margin = null;
 };

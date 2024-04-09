@@ -45,7 +45,7 @@ export const getAllOpenedFiles = (plugin: IconFolderPlugin): FileWithLeaf[] => {
     .reduce<FileWithLeaf[]>((prev, curr) => {
       const file = curr.view.file;
       if (file) {
-        prev.push({ ...file, leaf: curr });
+        prev.push({ ...file, leaf: curr, pinned: false });
       }
       return prev;
     }, []);
@@ -110,4 +110,26 @@ export const removeIconFromIconPack = (
   if (!duplicatedIcon) {
     removeIconFromIconPackDirectory(plugin, iconPackName, iconName);
   }
+};
+
+/**
+ * A utility function which will convert a string to a hexadecimal color.
+ * @param str String that will be converted to a hexadecimal color.
+ * @returns A string which is the hexadecimal color.
+ */
+export const stringToHex = (str: string): string => {
+  const validHex = str.replace(/[^0-9a-fA-F]/g, '');
+  const hex = validHex.padStart(6, '0').substring(0, 6);
+  return `#${hex}`;
+};
+
+/**
+ * A utility function which will check if a string is a hexadecimal color.
+ * @param str String that will be checked if it is a hexadecimal color.
+ * @param includeHash Boolean which will include the hash in the check.
+ * @returns A boolean which is true if the string is a hexadecimal color.
+ */
+export const isHexadecimal = (str: string, includeHash = false): boolean => {
+  const regex = new RegExp(`^${includeHash ? '#' : ''}[0-9A-Fa-f]{1,6}$`);
+  return regex.test(str);
 };

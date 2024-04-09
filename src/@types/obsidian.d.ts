@@ -1,4 +1,4 @@
-import { TAbstractFile, TFile, View, WorkspaceLeaf } from 'obsidian';
+import { TAbstractFile, TFile, View, ViewState, WorkspaceLeaf } from 'obsidian';
 
 interface InternalPlugin {
   enabled: boolean;
@@ -65,7 +65,7 @@ declare module 'obsidian' {
   }
 }
 
-type FileWithLeaf = TFile & { leaf: ExplorerLeaf };
+type FileWithLeaf = TFile & { leaf: ExplorerLeaf; pinned: boolean };
 
 interface ExplorerLeaf extends WorkspaceLeaf {
   view: ExplorerView;
@@ -82,10 +82,18 @@ interface DomChild {
   containerEl: HTMLElement;
 }
 
+interface ExplorerViewState extends ViewState {
+  state: {
+    source: boolean; // true if source view is active
+  };
+}
+
 interface ExplorerView extends View {
   fileItems: Record<string, FileItem>; // keyed by path
   ready: boolean; // true if fileItems is populated
   file?: TFile;
+  getViewState(): ExplorerViewState;
+  getMode(): 'source' | 'preview';
   dom: { children: DomChild[]; changed: () => void };
 }
 

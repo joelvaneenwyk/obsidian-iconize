@@ -75,7 +75,7 @@ export interface IconFolderSettings {
   fontSize: number;
   /**
    * Sets the style of the emoji. The option `none` means that no emojis will be used.
-   * @default 'none'
+   * @default 'native'
    */
   emojiStyle: EmojiStyle;
   /**
@@ -136,17 +136,27 @@ export interface IconFolderSettings {
    */
   iconsInNotesEnabled: boolean;
   /**
+   * Sets whether the plugin should be able to show icons in the links.
+   * @default true
+   */
+  iconsInLinksEnabled: boolean;
+  /**
    * Sets the icon identifier used in notes.
    * @default ':'
    */
   iconIdentifier: string;
+  /**
+   * Sets whether the plugin should be in debug mode. This will enable more logging
+   * in the console.
+   */
+  debugMode?: boolean;
 }
 
 export const DEFAULT_SETTINGS: IconFolderSettings = {
   migrated: 2,
   iconPacksPath: '.obsidian/icons',
   fontSize: 16,
-  emojiStyle: 'none',
+  emojiStyle: 'native',
   iconColor: null,
   recentlyUsedIcons: [],
   recentlyUsedIconsSize: 5,
@@ -162,5 +172,7 @@ export const DEFAULT_SETTINGS: IconFolderSettings = {
   iconInFrontmatterEnabled: false,
   iconsBackgroundCheckEnabled: false,
   iconsInNotesEnabled: true,
+  iconsInLinksEnabled: true,
   iconIdentifier: ':',
+  debugMode: false,
 };

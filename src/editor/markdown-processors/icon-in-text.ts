@@ -7,8 +7,9 @@ import {
   isHeader,
 } from '@app/lib/util/text';
 import IconFolderPlugin from '@app/main';
+import emoji from '@app/emoji';
 
-export const processMarkdown = (
+export const processIconInTextMarkdown = (
   plugin: IconFolderPlugin,
   element: HTMLElement,
 ) => {
@@ -75,5 +76,32 @@ export const processMarkdown = (
         );
       }
     }
+  }
+
+  const emojis = Array.from(element.innerHTML.matchAll(emoji.regex));
+  for (let index = 0; index < emojis.length; index++) {
+    const firstElementChild = element.firstElementChild ?? element;
+    const emojiMatch = emojis[index];
+    const emojiName = emojiMatch[0];
+    if (!emoji.isEmoji(emojiName)) {
+      continue;
+    }
+
+    const tagName = firstElementChild.tagName.toLowerCase();
+    let fontSize = calculateFontTextSize();
+    if (isHeader(tagName)) {
+      fontSize = calculateHeaderSize(tagName as Header);
+    }
+
+    const parsedEmoji = emoji.parseEmoji(
+      plugin.getSettings().emojiStyle,
+      emojiName,
+      fontSize,
+    );
+
+    firstElementChild.innerHTML = firstElementChild.innerHTML.replace(
+      emojiName,
+      parsedEmoji,
+    );
   }
 };
