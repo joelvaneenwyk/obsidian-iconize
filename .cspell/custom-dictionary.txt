@@ -1,0 +1,20 @@
+# Custom Dictionary Words
+codemirror
+codeql
+collab
+commitlint
+davelosert
+devicon
+dotenvx
+florianwoelki
+fontawesome
+Frontmatter
+Intellij
+lishid
+nojekyll
+onwarn
+rangeset
+remixicons
+vitepress
+Vitest
+Woelki
