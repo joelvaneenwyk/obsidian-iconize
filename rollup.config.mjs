@@ -2,9 +2,10 @@ import typescript from '@rollup/plugin-typescript';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import alias from '@rollup/plugin-alias';
-import copyFile from './copy-file.js';
-import { obsidianExportPath } from './env.js';
+import copyFile from './copy-file.mjs';
+import dotenv from '@dotenvx/dotenvx';
 
+dotenv.config();
 const isProd = process.env.BUILD === 'production';
 
 const banner = `/*

@@ -20,7 +20,7 @@ devicon
 
 # obsidian
 data.json
-env.js
+env.mjs
 
 # Vitepress
 docs/.vitepress/dist

@@ -32,12 +32,12 @@ If you like this plugin, feel free to support the development by buying a coffee
 To customize this project for your needs, you can clone it and then install all dependencies:
 
 ```sh
-git clone https://github.com/FlorianWoelki/obsidian-iconize
+git clone https://github.com/joelvaneenwyk/obsidian-iconize
 cd obsidian-iconize
 pnpm i
 ```
 
-After the installation, you need to create a `env.js` file in the root directory. Fill the file with the following content:
+After the installation, you need to create a `env.mjs` file in the root directory. Fill the file with the following content:
 
 ```js
 export const obsidianExportPath =
