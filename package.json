@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "type": "module",
   "types": "lib/index.d.ts",
+  "packageManager": "pnpm@8.15.6",
   "scripts": {
     "prepare": "husky",
     "dev": "rollup --config rollup.config.mjs -w",
