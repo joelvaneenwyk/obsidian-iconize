@@ -4,5 +4,6 @@ commitlint
 florianwoelki
 Frontmatter
 lishid
+nojekyll
 vitepress
 Woelki
