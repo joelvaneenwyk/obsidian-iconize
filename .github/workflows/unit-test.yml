@@ -20,6 +20,7 @@ concurrency:
 
 jobs:
   build:
+    name: "build ⚙️"
     runs-on: ubuntu-latest
 
     permissions:
@@ -99,7 +100,7 @@ jobs:
       id-token: write
 
     runs-on: ubuntu-latest
-    name: Deploy
+    name: "deploy 🚀"
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
