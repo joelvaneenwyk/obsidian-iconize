@@ -1,7 +1,9 @@
 # Custom Dictionary Words
 codemirror
+codeql
 collab
 commitlint
+davelosert
 devicon
 dotenvx
 florianwoelki
