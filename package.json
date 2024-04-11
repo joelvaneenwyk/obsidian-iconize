@@ -1,9 +1,8 @@
 {
-  "name": "@florianwoelki/obsidian-iconize",
+  "name": "@joelvaneenwyk/obsidian-iconize",
   "version": "2.11.9",
   "description": "API for adding icons to obsidian.",
   "main": "lib/index.js",
-  "type": "module",
   "types": "lib/index.d.ts",
   "packageManager": "pnpm@8.15.6",
   "scripts": {
@@ -14,20 +13,20 @@
     "docs:preview": "vitepress preview docs",
     "build": "rollup --config rollup.config.mjs --environment BUILD:production",
     "build:lib": "tsc --project tsconfig.lib.json",
-    "release": "mkdir -p dist && mv main.js dist/ && cp src/styles.css dist/ && cp manifest.json dist/",
-    "test": "pnpm run test:vitest",
+    "release": "npm run build && shx mkdir -p dist && shx mv main.js dist/ && shx cp src/styles.css dist/ && shx cp manifest.json dist/",
+    "test": "pnpm test:vitest",
     "test:staged": "lint-staged",
     "test:vitest": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "lint": "eslint \"*/**/*.{js,ts,tsx}\" --config \".eslintrc\" --fix",
+    "lint": "eslint --config \".eslintrc\" --fix \"**/*.{js,ts,tsx}\"",
     "prettify": "prettier --write \"*/**/*.{js,ts,tsx}\""
   },
   "keywords": [],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FlorianWoelki/obsidian-iconize.git"
+    "url": "git+https://github.com/joelvaneenwyk/obsidian-iconize.git"
   },
-  "author": "FlorianWoelki",
+  "author": "Joel Van Eenwyk",
   "license": "MIT",
   "lint-staged": {
     "*.{json,js,ts,jsx,tsx,html}": [
@@ -63,6 +62,7 @@
     "obsidian": "^1.5.7",
     "prettier": "^3.2.5",
     "rollup": "^4.14.1",
+    "shx": "^0.3.4",
     "tslib": "^2.6.2",
     "twemoji": "^14.0.2",
     "typescript": "^5.4.5",

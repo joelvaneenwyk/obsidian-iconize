@@ -1,5 +1,7 @@
 # Obsidian Iconize
 
+> ⚠️ This is a branch of the great work by [FlorianWoelki](https://github.com/FlorianWoelki) in the original [obsidian-iconize](https://github.com/FlorianWoelki/obsidian-iconize).
+
 ![Preview Image](./docs/preview-image.png)
 
 ## What is it?
@@ -9,7 +11,7 @@
 This Obsidian plugin allows you to add **any** custom icon (of type `.svg`) or from an icon pack to anything you want.
 
 Refer to the official documentation for more information:
-[https://florianwoelki.github.io/obsidian-iconize/](https://florianwoelki.github.io/obsidian-iconize/) about the plugin and its functionalities.
+[https://joelvaneenwyk.github.io/obsidian-iconize/](https://florianwoelki.github.io/obsidian-iconize/) about the plugin and its functionalities.
 
 If you like this plugin, feel free to support the development by buying a coffee:
 
