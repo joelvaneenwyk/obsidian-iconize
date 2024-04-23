@@ -1,11 +1,11 @@
 version: "0.2"
 ignorePaths: []
 dictionaryDefinitions:
-  - name: custom-dictionary
-    path: ./.cspell/custom-dictionary.txt
+  - name: obsidian-iconize
+    path: ./.vscode/cspell-obsidian-iconize.dict
     addWords: true
 dictionaries:
-  - custom-dictionary
+  - obsidian-iconize
 words: []
 ignoreWords: []
 import: []
