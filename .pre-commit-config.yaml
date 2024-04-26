@@ -3,8 +3,11 @@ repos:
     rev: v4.6.0
     hooks:
       - id: trailing-whitespace
+        exclude: ^.*\.md$
       - id: end-of-file-fixer
+        exclude: ^.*\.md$
       - id: check-yaml
+        exclude: ^pnpm-lock\.yaml$
       - id: debug-statements
       - id: double-quote-string-fixer
       - id: name-tests-test

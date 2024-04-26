@@ -2,8 +2,79 @@
 
 version: "3"
 
+vars:
+  RMF: '{{if eq .OS "Windows_NT"}}powershell -NoProfile -Command Remove-Item -Recurse -Force {{else}}rm -rf{{end}}'
+  RM: '{{if eq .OS "Windows_NT"}}cmd /d /c rmdir /q /s{{else}}rm -rf{{end}}'
+  OUTPUT_DIRECTORY: "{{.USER_WORKING_DIR}}/.build"
+  PROJECT_ROOT: "{{.TASKFILE_DIR}}"
+  GIT: 'git -C "{{fromSlash .PROJECT_ROOT}}"'
+  VS2019: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+  VS2022: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+  DEV_RUN: '{{if eq .OS "Windows_NT"}}cmd /d /c call "{{fromSlash .VS2022}}" -startdir="${PROJECT_ROOT}" -app_platform=Desktop -no_logo -no_ext -arch=x64 -host_arch=x64" &&{{end}}'
+  PROTO: '{{if eq .OS "Windows_NT"}}$USERPROFILE/.proto/bin/proto.exe{{else}}proto{{end}}'
+  NPM: "{{.PROTO}} run npm --"
+  PY: "{{.PROTO}} run python --"
+  PNPM: "{{.PROTO}} run pnpm --"
+  NODE: "{{.PROTO}} run node --"
+
 tasks:
   default:
     cmds:
-      - cmd: pnpm install
-      - cmd: pnpm build
+      - task: pull
+      - task: build
+
+  pull:
+    cmds:
+      - cmd: "{{.GIT}} pull --rebase --autostash"
+
+  proto:
+    preconditions:
+      - cmd: "{{.PROTO}}"
+    cmds:
+      - cmd: "{{.PROTO}}/.build"
+
+  build:
+    deps: [install]
+    cmds:
+      - cmd: "{{.PNPM}} build"
+    silent: false
+
+  lint:
+    cmds:
+      - cmd: "{{.PROTO}} use"
+      - cmd: "{{.PNPM}} install"
+      - cmd: "{{.PY}} -m pip install pre_commit"
+      - cmd: "{{.PY}} -m pre_commit run --all-files"
+
+  install:
+    cmds:
+      - cmd: "{{.PROTO}} use"
+      - cmd: "{{.PY}} -m pip install pre_commit"
+      - cmd: "{{.PY}} -m pre_commit autoupdate"
+      - cmd: "{{.PY}} -m pre_commit install"
+
+  #
+  # Internal helper tasks
+  #
+
+  kill-process:
+    internal: true
+    vars:
+      TARGET: '{{default "[Invalid_Process_Target]" .TARGET}}'
+    cmds:
+      - cmd: '{{if eq .OS "Windows_NT"}}powershell -NoProfile -Command Stop-Process -ErrorAction SilentlyContinue -Name "{{.TARGET}}" -Force{{else}}pkill -f "{{.TARGET}}"{{end}}'
+        ignore_error: true
+
+  remove-directory:
+    internal: true
+    vars:
+      TARGET: '{{default "[DIR_NAME]" .TARGET}}'
+    cmds:
+      - '{{if eq .OS "Windows_NT"}}cmd /d /c if exist "{{.TARGET}}" rmdir /q /s "{{.TARGET}}"{{else}}rm -rf {{.TARGET}}{{end}}'
+
+  make-directory:
+    internal: true
+    vars:
+      TARGET: '{{default "[DIR_NAME]" .TARGET}}'
+    cmds:
+      - '{{if eq .OS "Windows_NT"}}cmd /d /c if not exist "{{.TARGET}}" mkdir "{{.TARGET}}"{{else}}mkdir -p "{{.TARGET}}"{{end}}'
